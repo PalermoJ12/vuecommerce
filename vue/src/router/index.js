@@ -5,12 +5,29 @@ import ManageUser from "@/Pages/ManageUser.vue";
 import HomeView from "../Pages/HomeView.vue";
 import LoginPage from "../Pages/LoginPage.vue";
 import RegisterPage from "@/Pages/RegisterPage.vue";
-
+import CartView from "@/Pages/CartView.vue";
 const routes = [
   {
     path: "/user/home",
     component: HomeView,
     name: "HomeView",
+    beforeEnter: (to, from, next) => {
+      if (localStorage.getItem("token") && localStorage.getItem("role") == 0) {
+        next();
+      } else if (
+        localStorage.getItem("token") &&
+        localStorage.getItem("role") == 1
+      ) {
+        next("/admin/manageproduct");
+      } else {
+        next("/");
+      }
+    },
+  },
+  {
+    path: "/user/cart",
+    component: CartView,
+    name: "CartView",
     beforeEnter: (to, from, next) => {
       if (localStorage.getItem("token") && localStorage.getItem("role") == 0) {
         next();

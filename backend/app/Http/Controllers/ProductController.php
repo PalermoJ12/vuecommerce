@@ -35,7 +35,10 @@ class ProductController extends Controller
             'quantity' => 'required|integer',
             'category' => 'required|string',
 
+            'image' => 'string'
+
         ]);
+
 
         $product = Product::create($request->all());
 
@@ -57,6 +60,7 @@ class ProductController extends Controller
                 'price' => 'required|numeric',
                 'quantity' => 'required|integer',
                 'category' => 'required|string',
+
             ]);
 
 
